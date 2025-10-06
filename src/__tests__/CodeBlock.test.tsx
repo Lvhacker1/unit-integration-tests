@@ -11,7 +11,7 @@ describe('CodeBlock Component', () => {
 
     test('renders language heading with getByRole', () => {
         render(<CodeBlock {...mockProps} />);
-        expect(screen.getByRole('heading')).toHaveTextContent('Javascript');
+        expect(screen.getByRole('heading')).toHaveTextContent(mockProps.language);
     });
 
     test('renders button with initial Run text', () => {
@@ -23,7 +23,7 @@ describe('CodeBlock Component', () => {
         render(<CodeBlock {...mockProps} />);
         const button = screen.getByRole('button');
         fireEvent.click(button);
-        expect(screen.getByText("console.log('Hello, world!');")).toBeInTheDocument();
+        expect(screen.getByText(mockProps.code)).toBeInTheDocument();
     });
 
     test('changes button text to Hide after click event', () => {

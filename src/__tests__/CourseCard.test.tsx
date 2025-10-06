@@ -14,24 +14,24 @@ describe('CourseCard Component', () => {
 
     test('renders programming language as h3 heading with getByRole', () => {
         render(<CourseCard {...mockProps} />);
-        expect(screen.getByRole('heading', { level: 3 })).toHaveTextContent('JavaScript');
+        expect(screen.getByRole('heading', { level: 3 })).toHaveTextContent(mockProps.language);
     });
 
     test('renders topic as h4 heading using getAllByRole', () => {
         render(<CourseCard {...mockProps} />);
         const headings = screen.getAllByRole('heading');
-        expect(headings[1]).toHaveTextContent('Web Development');
+        expect(headings[1]).toHaveTextContent(mockProps.topic);
     });
 
     test('renders role as h4 heading using getAllByRole', () => {
         render(<CourseCard {...mockProps} />);
         const headings = screen.getAllByRole('heading');
-        expect(headings[2]).toHaveTextContent('Websites, Frontend, Backend (Node.js)');
+        expect(headings[2]).toHaveTextContent(mockProps.role);
     });
 
     test('renders description with getByText', () => {
         render(<CourseCard {...mockProps} />);
-        expect(screen.getByText('JavaScript is a versatile language used for interactive web development.')).toBeInTheDocument();
+        expect(screen.getByText(mockProps.description)).toBeInTheDocument();
     })
 
     test('renders button with text "Read More" using getByRole', () => {
@@ -41,6 +41,7 @@ describe('CourseCard Component', () => {
 
     test('shows full description when "Learn More" button is clicked', () => {
         render(<CourseCard {...mockProps} />);
+        expect(screen.queryByText(mockProps.fullDescription)).not.toBeInTheDocument();
         const button = screen.getByRole('button');
         fireEvent.click(button);
         expect(screen.getByText(mockProps.fullDescription)).toBeInTheDocument();
